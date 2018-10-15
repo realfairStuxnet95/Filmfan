@@ -26,8 +26,7 @@
 
             <TextView
                 android:id="@+id/movie_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/matchWidth"
                 android:layout_below="@id/thumbnail"
                 android:padding="@dimen/title_padding_left"
                 android:textColor="@color/movie_title"
@@ -35,19 +34,15 @@
                 android:text="@string/app_name"/>
             <TextView
                 android:id="@+id/release_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/wrap"
                 android:layout_below="@id/movie_title"
-                android:padding="@dimen/title_padding_left"
                 android:textColor="@color/release_date"
                 android:textSize="@dimen/release_date_text"
                 android:text="@string/app_name"/>
             <TextView
                 android:id="@+id/vote_average"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/wrap"
                 android:layout_below="@id/release_date"
-                android:padding="@dimen/title_padding_left"
                 android:textColor="@color/average_vote"
                 android:textSize="@dimen/average_vote_text"
                 android:text="@string/app_name"/>

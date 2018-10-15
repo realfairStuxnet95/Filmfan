@@ -5,7 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
+
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,8 +18,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -114,6 +114,15 @@ public class MovieDetails extends AppCompatActivity {
                 widgets.displayToast(String.valueOf(ratings));
             }
         });
+
+        //FloatingActionButton Clicked
+        rate_movie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG,"AddingToFavorites Fab Clicked");
+                AddingToFavorites(view);
+            }
+        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -128,15 +137,23 @@ public class MovieDetails extends AppCompatActivity {
         toolbar_layout.setCollapsedTitleTextColor(getColor(R.color.white));
         toolbar_layout.setTitle(movie.getOriginal_title());
         movie_overview.setText(movie.getOverview());
-        txt_release_date.setText(getResources().getString(R.string.release)+" : "+movie.getRelease_date());
-        txt_ratings.setText(getResources().getString(R.string.ratings)+" : "+movie.getVote_average());
+        txt_release_date.setText(formatStringset(getString(R.string.release),movie.getRelease_date()));
+        txt_ratings.setText(formatStringset(getResources().getString(R.string.ratings),String.valueOf(movie.getVote_average())));
+
         requestMovieInfo(movie);
         RequestActors();
     }
 
+    //String Well Formatting
+    private StringBuilder formatStringset(String resource,String value){
+        StringBuilder stringBuilder=new StringBuilder();
+        stringBuilder.append(resource);
+        stringBuilder.append(value);
+
+        return stringBuilder;
+    }
     private void requestMovieInfo(Movie movie){
-        String BACKLOG_URL;
-        BACKLOG_URL=urlManager.getMovie_detial();
+        String BACKLOG_URL=urlManager.getMovie_detial();
         //Check RequestQue
         if(queue==null){
             // Instantiate the RequestQueue.
@@ -323,5 +340,13 @@ public class MovieDetails extends AppCompatActivity {
         }else{
             dialog.dismiss();
         }
+    }
+
+    //Adding to favorite
+    private void AddingToFavorites(View view){
+        Snackbar snackbar = Snackbar
+                .make(view, getResources().getString(R.string.favorites_alert), Snackbar.LENGTH_LONG);
+
+        snackbar.show();
     }
 }

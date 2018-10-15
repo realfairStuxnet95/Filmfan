@@ -32,6 +32,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private Context context;
     private List<Movie>movies;
     RequestQueue queue;
+
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         nowShowingMovies();
     }
+
     //Movies Request Loading Method
     private void nowShowingMovies(){
         Log.d(TAG, "nowShowingMovies Called.");
@@ -103,10 +108,13 @@ public class MainActivity extends AppCompatActivity {
             // Instantiate the RequestQueue.
            queue = Volley.newRequestQueue(this);
         }
+
         //Check for Api Token
         if(BuildConfig.MOVIE_DB_API_TOKEN.isEmpty()){
             displayToast(getResources().getString(R.string.Invalid_api_token));
         }
+        //Show Progress Loader
+
         showProgress(true);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, UrlManager.NOW_PLAYING_MOVIES,
                 new Response.Listener<String>() {
@@ -161,14 +169,27 @@ public class MainActivity extends AppCompatActivity {
                 String overview=movie_result.getString(getResources().getString(R.string.overview_json));
                 String release_date=movie_result.getString(getResources().getString(R.string.release_date));
 
-                //Append Resultset to Movie Model
+                //Append Result set to Movie Model
                 Movie movie=new Movie(voteCount,id,video,vote_average,title,popularity,poster_path,original_language,original_title,backdrop_path,adult,overview,release_date);
                 movies.add(movie);
             }
+            sortArrayList();
             //notify adapter for view data changes
             adapter.notifyDataSetChanged();
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    //Sort an Array in Alphabetic Order
+    private void sortArrayList() {
+        Collections.sort(movies, new Comparator<Movie>() {
+            @Override
+            public int compare(Movie movie, Movie t1) {
+                return movie.getTitle().compareTo(t1.getTitle());
+            }
+        });
+
+        adapter.notifyDataSetChanged();
     }
 }

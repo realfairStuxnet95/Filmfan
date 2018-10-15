@@ -26,33 +26,26 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/txt_movie_overview"
             android:padding="@dimen/movie_title_padding"
-            android:text="@string/dummy"
             />
         <TextView
             android:id="@+id/txt_release_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/wrap"
             android:text="@string/release"
-            android:padding="@dimen/movie_title_padding"
             android:textStyle="bold"
             android:layout_below="@id/movie_overview"
             />
         <TextView
             android:id="@+id/txt_average_vote"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/wrap"
             android:text="@string/movie_genre"
-            android:padding="5dp"
             android:textStyle="bold"
             android:layout_below="@id/txt_release_date"
             />
         <TextView
             android:id="@+id/txt_genres"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/release"
-            android:padding="@dimen/movie_title_padding"
+            style="@style/matchWidth"
             android:layout_below="@id/txt_average_vote"
+            android:layout_margin="@dimen/average_vote_text"
             />
         <TextView
             android:id="@+id/txt_ratings"

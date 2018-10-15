@@ -1,8 +1,10 @@
 package com.filmfan.filmfan.model;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 @SuppressWarnings("serial")
-public class Movie implements Serializable {
+public class Movie implements Serializable,Comparable {
     //Movie Model Class
     private int voteCount;
     private int id;
@@ -138,5 +140,10 @@ public class Movie implements Serializable {
 
     public void setRelease_date(String release_date) {
         this.release_date = release_date;
+    }
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        return toString().compareTo(o.toString());
     }
 }
