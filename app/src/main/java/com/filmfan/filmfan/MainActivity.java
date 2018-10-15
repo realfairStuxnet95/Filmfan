@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context=MainActivity.this;
+
         //initialize Widgets
         progressBar=findViewById(R.id.progressBar);
         swipeRefreshLayout=findViewById(R.id.swipeTorefresh);
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return null;
     }
+
     //widgets initialization
     private void initViews(){
         Log.d(TAG, "initViews Called.");
@@ -93,10 +95,12 @@ public class MainActivity extends AppCompatActivity {
         }else{
             recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this,4));
         }
+
         adapter=new MovieAdapter(context,movies);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
+
         nowShowingMovies();
     }
 
@@ -170,7 +174,8 @@ public class MainActivity extends AppCompatActivity {
                 String release_date=movie_result.getString(getResources().getString(R.string.release_date));
 
                 //Append Result set to Movie Model
-                Movie movie=new Movie(voteCount,id,video,vote_average,title,popularity,poster_path,original_language,original_title,backdrop_path,adult,overview,release_date);
+                Movie movie=new Movie(voteCount,id,video,vote_average,title,popularity,poster_path,
+                        original_language,original_title,backdrop_path,adult,overview,release_date);
                 movies.add(movie);
             }
             sortArrayList();
