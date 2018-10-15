@@ -3,6 +3,8 @@
     <string name="movie_name">Movie Title</string>
     <string name="overview">Movie Overview</string>
     <string name="release">Release Date</string>
+    <string name="movie_genre">Movie Genres</string>
+    <string name="ratings">Movie Ratings</string>
     <string name="title_activity_movie_details">MovieDetails</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
@@ -98,4 +100,39 @@
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium ad aliquid aspernatur culpa dignissimos distinctio ea eius eligendi error esse, exercitationem illo in, nobis officia optio repellendus sed, ut!
     </string>
     <string name="Invalid_api_token">Invalid API TOKEN key.Please obtain API token key first</string>
+
+    <string name="actors_list">Actors and Their Characteristics</string>
+    <string name="result_json">results</string>
+    <string name="vote_count">vote_count</string>
+    <string name="id">id</string>
+    <string name="video">video</string>
+    <string name="vote_average">vote_average</string>
+    <string name="title">title</string>
+    <string name="popularity">popularity</string>
+    <string name="poster_path">poster_path</string>
+    <string name="original_language">original_language</string>
+    <string name="original_title">original_title</string>
+    <string name="backdrop_path">backdrop_path</string>
+    <string name="adult">adult</string>
+    <string name="overview_json">overview</string>
+    <string name="release_date">release_date</string>
+    <string name="genres">genres</string>
+    <string name="genre_name">name</string>
+
+    <string name="cast">cast</string>
+    <string name="cast_id">cast_id</string>
+    <string name="character">character</string>
+    <string name="credit_id">credit_id</string>
+    <string name="gender">gender</string>
+    <string name="actor_id">id</string>
+    <string name="name">name</string>
+    <string name="order">order</string>
+    <string name="profile_path">profile_path</string>
+    <string name="rate_movie">Rate Movie ?</string>
+
+    <string name="request_token_failed">There was an Error Creating Request Token</string>
+    <string name="alert_title">Request for Access</string>
+    <string name="alert_message">you need to Accept MovieDB terms and condition by Clicking Yes you will be Redirected to theire Website Click accept</string>
+    <string name="alert_yes">YES</string>
+    <string name="alert_no">NO</string>
 </resources>

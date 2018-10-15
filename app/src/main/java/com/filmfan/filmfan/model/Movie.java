@@ -1,33 +1,21 @@
 package com.filmfan.filmfan.model;
 
-import com.google.gson.annotations.SerializedName;
-
-public class Movie {
-    @SerializedName("vote_count")
+import java.io.Serializable;
+@SuppressWarnings("serial")
+public class Movie implements Serializable {
+    //Movie Model Class
     private int voteCount;
-    @SerializedName("id")
     private int id;
-    @SerializedName("video")
     private boolean video;
-    @SerializedName("vote_average")
     private double vote_average;
-    @SerializedName("title")
     private String title;
-    @SerializedName("popularity")
     private double popularity;
-    @SerializedName("poster_path")
     private String poster_path;
-    @SerializedName("original_language")
     private String original_language;
-    @SerializedName("original_title")
     private String original_title;
-    @SerializedName("backdrop_path")
     private String backdrop_path;
-    @SerializedName("adult")
     private boolean adult;
-    @SerializedName("overview")
     private String overview;
-    @SerializedName("release_date")
     private String release_date;
 
     public Movie(int voteCount, int id, boolean video, double vote_average, String title,

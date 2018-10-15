@@ -41,10 +41,66 @@
             android:id="@+id/txt_average_vote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/movie_genre"
+            android:padding="5dp"
+            android:textStyle="bold"
+            android:layout_below="@id/txt_release_date"
+            />
+        <TextView
+            android:id="@+id/txt_genres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/release"
+            android:padding="@dimen/movie_title_padding"
+            android:layout_below="@id/txt_average_vote"
+            />
+        <TextView
+            android:id="@+id/txt_ratings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/release"
             android:padding="@dimen/movie_title_padding"
             android:textStyle="bold"
-            android:layout_below="@id/txt_release_date"
+            android:layout_below="@id/txt_genres"
+            />
+        <TextView
+            android:id="@+id/txt_actors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/actors_list"
+            android:padding="@dimen/movie_title_padding"
+            android:textStyle="bold"
+            android:layout_below="@id/txt_ratings"
+            />
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recyclerView"
+            android:layout_below="@+id/txt_actors"
+            android:orientation="horizontal">
+
+        </android.support.v7.widget.RecyclerView>
+        <TextView
+            android:id="@+id/rating_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/rate_movie"
+            android:padding="@dimen/movie_title_padding"
+            android:textSize="@dimen/movie_title_text"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_below="@id/recyclerView"
+            />
+        <RatingBar
+            android:id="@+id/rating_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:numStars="5"
+            android:isIndicator="false"
+            style="@style/Base.Widget.AppCompat.RatingBar"
+            android:layout_below="@id/rating_title"
             />
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>
