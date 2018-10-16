@@ -3,6 +3,7 @@ package com.filmfan.filmfan;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
@@ -33,10 +34,12 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.filmfan.filmfan.adapters.ActorAdapter;
+import com.filmfan.filmfan.interfaces.MovieDetailsView;
 import com.filmfan.filmfan.model.Actor;
 import com.filmfan.filmfan.model.Movie;
 import com.filmfan.filmfan.utils.UrlManager;
 import com.filmfan.filmfan.utils.Widgets;
+import com.filmfan.filmfan.views.MovieDetailsPresenter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,27 +50,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MovieDetails extends AppCompatActivity {
+public class MovieDetails extends AppCompatActivity implements MovieDetailsView {
     private static final String TAG = "MovieDetails";
 
     //Widgets
     private Toolbar toolbar;
     private ImageView movie_poster;
     private CollapsingToolbarLayout toolbar_layout;
-    private TextView movie_overview;
+    public TextView movie_overview;
     private TextView txt_release_date;
     private TextView txt_genres;
     private TextView txt_ratings;
     private FloatingActionButton rate_movie;
     private RatingBar rating_bar;
     private Dialog dialog;
+
     //vars
+    private Context context;
     Movie movie;
     RequestQueue queue;
     Widgets widgets;
     UrlManager urlManager;
-    ArrayList<Actor>actors;
-    //vars
+
+    //Activity Presenter
+    MovieDetailsPresenter presenter;
+
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
 
@@ -76,9 +83,14 @@ public class MovieDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
+
+        context=MovieDetails.this;
+        presenter= new MovieDetailsPresenter(this);
+
         //Initialize Widgets
         toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         //get Intent Extra
         if(getIntent().getSerializableExtra("movie")!=null || getIntent().getSerializableExtra("movie")!=""){
             movie= (Movie) getIntent().getSerializableExtra("movie");
@@ -136,11 +148,11 @@ public class MovieDetails extends AppCompatActivity {
         toolbar_layout.setExpandedTitleColor(getColor(R.color.white));
         toolbar_layout.setCollapsedTitleTextColor(getColor(R.color.white));
         toolbar_layout.setTitle(movie.getOriginal_title());
-        movie_overview.setText(movie.getOverview());
+        presenter.movieOverviewUpdated(movie.getOverview());
         txt_release_date.setText(formatStringset(getString(R.string.release),movie.getRelease_date()));
         txt_ratings.setText(formatStringset(getResources().getString(R.string.ratings),String.valueOf(movie.getVote_average())));
 
-        requestMovieInfo(movie);
+        requestMovieInfo();
         RequestActors();
     }
 
@@ -152,7 +164,8 @@ public class MovieDetails extends AppCompatActivity {
 
         return stringBuilder;
     }
-    private void requestMovieInfo(Movie movie){
+
+    private void requestMovieInfo(){
         String BACKLOG_URL=urlManager.getMovie_detial();
         //Check RequestQue
         if(queue==null){
@@ -348,5 +361,15 @@ public class MovieDetails extends AppCompatActivity {
                 .make(view, getResources().getString(R.string.favorites_alert), Snackbar.LENGTH_LONG);
 
         snackbar.show();
+    }
+
+    @Override
+    public void changeMovieOverView(String text) {
+        movie_overview.setText(text);
+    }
+
+    @Override
+    public void changeReleaseDate(String text) {
+        txt_release_date.setText(text);
     }
 }
